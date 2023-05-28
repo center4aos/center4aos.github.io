@@ -1,6 +1,12 @@
-# The Center for Accessibility and Open Source
+# The Center for Accessibility and Open Source -- CAOS
 
-The center for accessibility and open source CAOS, aims to be the most trusted global community for resources and information at the intersection of accessibility, disability equity, and open-source.
-With the goal of enhancing access to information and opportunity for people with disabilities, the Open Source Accessibility Foundation supports accessibility efforts for open-source projects, as well as the creation and sustenance of open-source accessibility projects.
+CAOS supports     disability inclusion in  open-source communities , as well as  open-source communities that focus on accessibility.  
 
-The Center for Accessibility & Open Source is a work in progress, but in the meantime, please feel free to contact us at info@caos.org.
+Open source  helps drive  global equity, but   to benefit people with disabilities,  open-source communities  must be disability-inclusive, and open-source projects must be accessible. 
+
+
+We make accessible open-source happen!
+
+
+This site  is under construction. 
+Please direct inquiries  to  info@caos.org.
