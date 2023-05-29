@@ -1,4 +1,4 @@
-# The Center for Accessibility and Open Source -- CAOS
+# Welcome to CAOS — The Center for Accessibility and Open Source
 
 CAOS supports     disability inclusion in  open-source communities , as well as  open-source communities that focus on accessibility.  
 
