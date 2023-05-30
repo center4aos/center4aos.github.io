@@ -1,10 +1,14 @@
-# Welcome to CAOS — The Center for Accessibility and Open Source
+<h2 align="center">
+Welcome to CAOS — The Center for Accessibility and Open Source
+</h2>
 
-CAOS supports     disability inclusion in  open-source communities , as well as  open-source communities that focus on accessibility.  
+<p align="center">
+We  make accessible open-source happen!
+</p>
 
-Open source  helps drive  global equity, but   to benefit people with disabilities,  open-source communities  must be disability-inclusive, and open-source projects must be accessible. 
+CAOS supports     disability inclusion in  open-source communities , and   open-source communities that focus on accessibility.  
 
-<center><b>CAOS makes accessible open-source happen!</b></center>
+Open source  helps drive  global equity, but   to benefit everyone,  open-source communities  must be disability-inclusive, and open-source projects must be accessible. 
 
 
 CAOS   is under construction. Please check back soon.
