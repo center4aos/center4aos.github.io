@@ -2,7 +2,7 @@
 
 Jekyll site for the **Center for Accessibility and Open Source** (CAOS).
 
-**Live site:** http://caos.org/caostest/  
+**Live site:** https://caos.org/caostest/  
 **Organization:** https://github.com/center4aos
 
 ---
@@ -19,19 +19,31 @@ CAOS is a California 501(c)(3) nonprofit — the first organization to make the 
 |---|---|
 | `_posts/` | Blog posts |
 | `_events/` | Calendar events |
-| `_layouts/default.html` | Base page template (skip link, nav, breadcrumbs, footer, focus management, external link handling) |
+| `_leadership/` | Officer and board bios and headshots, one `.md` + `.jpg` pair per person (see below) |
+| `_layouts/default.html` | Base page template (skip link, nav, breadcrumbs, footer, focus management, external link handling; supplies titles for Policy Library documents) |
+| `_layouts/page.html` | Minimal layout used by Policy Library documents |
 | `_layouts/event.html` | Event detail page template |
 | `_includes/header.html` | Skip-to-main link, site title, nav with aria-current |
-| `_includes/footer.html` | Social links, accessibility statement, license, donate |
-| `_includes/breadcrumbs.html` | Auto breadcrumbs using `parent` / `parent_url` front matter |
+| `_includes/footer.html` | Accessibility statement, contact, donate, "Suggest a change" / "Send a suggestion" feedback links, license |
+| `_includes/breadcrumbs.html` | Breadcrumbs built from the `ancestors` list (set per page, or by `_config.yml` defaults) |
+| `_includes/leadership-card.html` | One leadership bio card on the About page |
+| `_includes/external-repo-listing.html` | Recursive listing used by the Policy Library page |
+| `governance/library/` | Git submodule of [center4aos/governance](https://github.com/center4aos/governance), served as the Policy Library |
+| `_data/external_repos.yml` | Registry of mounted repos (currently just governance) |
+| `_data/external_repo_pages/` | Generated page titles and tree for each mounted repo, written by `script/sync-external-repo-pages.rb` |
+| `_external_repo_pages/governance.md` | The Policy Library listing page at `/governance/library/` |
+| `script/` | `sync-external-repo-pages.rb` (regenerates the data above) and `validate-leadership.rb` |
+| `.github/workflows/update-submodule.yml` | Updates the governance submodule automatically when the governance repo changes |
+| `.github/ISSUE_TEMPLATE/page-issue.md` | Template for "Suggest a change" issues filed against this repo |
 | `assets/css/accessibility.scss` | Accessibility-focused style overrides |
 | `index.md` | Home page: mission, blog preview, upcoming events, newsletter signup |
-| `about.md` | About CAOS, mission, board bios |
+| `about.md` | About CAOS, mission, leadership bios, advisory board |
 | `projects.md` | Active partnerships (CREATE, Teach Access, NV Access) |
 | `resources.md` | Curated accessibility resources (content placeholder) |
-| `governance.md` | Policy Library link, board meeting info |
-| `support.md` | Donation information |
-| `contact.md` | Contact form and newsletter signup |
+| `governance.md` | 501(c)(3) and transparency statements, Policy Library link, Form 990, board meetings |
+| `support.md` | Donation information (PayPal, Venmo, Benevity, planned giving, check) |
+| `contact.md` | Contact form (Formspree) and newsletter signup (Buttondown) |
+| `subscribe-confirm.md`, `subscribe-thanks.md`, `contact-thanks.md` | Confirmation pages for the newsletter and contact form |
 | `calendar.md` | Upcoming events |
 | `blog.md` | Blog index |
 | `accessibility-statement.md` | Public accessibility commitment |
@@ -64,14 +76,30 @@ title: "Event Title"
 date: 2026-07-15
 time: "7:00 PM Pacific Time"
 location: "Zoom (optional)"
-parent: Calendar
-parent_url: /calendar/
 ---
 
 Event description in Markdown.
 ```
 
-Events are sorted chronologically. Past events are not displayed on the calendar page. The calendar rebuilds on every push, so past events drop off automatically.
+Events are sorted chronologically. Past events are not displayed on the calendar page. The calendar rebuilds on every push, so past events drop off automatically. The "Calendar" breadcrumb is added automatically; events don't need to set it.
+
+## Adding or Updating a Leadership Bio
+
+Each person gets a pair of files in `_leadership/` with the same name: `<stem>.md` and `<stem>.jpg`. The `.md` holds front matter only:
+
+```yaml
+---
+name: Jane Doe
+role: Board Member
+bio: >-
+  One short paragraph. Markdown links are allowed.
+desc: Image description (alt text) for the headshot.
+---
+```
+
+- Cards are listed in filename order. Put a number at the start of the stem (e.g. `0Miele`) to control the order; it is never displayed.
+- If there's no `.jpg` yet, the card shows `fallback.jpg` with the alt text "CAOS generic image".
+- Run `ruby script/validate-leadership.rb` to check for missing fields or photos with no matching `.md`.
 
 ---
 
@@ -90,26 +118,27 @@ Never hardcode `/caostest/...` paths or bare root-relative `/path/` links — bo
 ## Technical Notes
 
 - **Theme:** `minima` (native gem) with `skin: auto` for system light/dark preference
-- **Breadcrumbs:** Child pages (bylaws, COI, events) use `parent` and `parent_url` front matter
+- **Breadcrumbs:** Built from an `ancestors` list of `{title, url}` pairs. Blog posts and events get theirs from `_config.yml` defaults, Policy Library documents from `_data/external_repos.yml`, and other child pages set it in their own front matter
 - **Screen reader focus:** On page load, focus moves programmatically to the first H2 in `.post-content`, falling back to `#main-content`, for consistent NVDA/JAWS experience
 - **External links:** Automatically open in a new tab with a screen-reader-friendly `aria-label`
-- **Forms:** Contact form backend not yet configured — see `contact.md` for TODO
-- **GitHub Pages:** Legacy build from root of `main` branch; `baseurl: /caostest`
+- **Forms:** Contact form posts to Formspree; newsletter signup (home and contact pages) posts to Buttondown
+- **Policy Library:** When the governance repo's `main` branch changes, its `notify-site.yml` workflow triggers this repo's `update-submodule.yml`, which updates the submodule, regenerates `_data/external_repo_pages/governance.yml`, and pushes. No manual step needed. Governance documents need an empty front matter block (`---` / `---`) at the top to render as pages
+- **GitHub Pages:** Legacy build from root of `main` branch; `baseurl: /caostest`. Moving to the domain root is a one-time checklist in `CAOS Site Requirements.md`
 
 ---
 
 ## Outstanding TODOs
 
-- Wire up contact form backend (Formspree or groups.io POST URL)
-- Wire up newsletter signup on contact page (Buttondown embed)
-- Add real content to resources page
-- Add full board member bios and photos to about page
-- Add advisory board member list to about page
-- Add mailing address and EIN to support page
-- Add Form 990 link to governance page
-- Add board meeting schedule to governance page
-- ~~Enable HTTPS enforcement on GitHub Pages settings~~ ✅ done
-- ~~Delete legacy `docs/` folder from repo~~ ✅ done
+Open work is tracked in [issues](https://github.com/center4aos/caostest/issues). Site content still to be written:
+
+- Resources page: actual resource listings
+- About page: advisory board member list
+- Governance page: Form 990 link
+- Governance page: board meeting schedule
+- Support page: Benevity organization ID (see issue #1)
+- About page: image description for Elizabeth Ruhland's photo (see issue #25)
+- Calendar: no upcoming events (the only event, the July 15 board meeting, has passed)
+- Move the site from `/caostest/` to the domain root (see the migration checklist in `CAOS Site Requirements.md`)
 
 ---
 

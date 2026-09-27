@@ -1,6 +1,6 @@
 # CAOS Site Requirements
 
-*Last updated: June 2026. Items marked ✅ are complete; items marked 🔲 are still pending.*
+*Last updated: September 2026. Items marked ✅ are complete; items marked 🔲 are still pending.*
 
 ## Core Requirements
 
@@ -33,8 +33,8 @@
 - ✅ Breadcrumbs for child pages
 - ✅ H1 page title rendered by layout; H2 as first content heading
 - ✅ Screen reader focus initializes on first H2 on page load
-- ✅ Footer: social media links, donate, accessibility statement, license
-- 🔲 Footer: "Submit an Issue" link (see Technical Implementation Notes)
+- ✅ Footer: accessibility statement, contact, donate, license (social media links were removed to reduce clutter)
+- ✅ Footer: "Suggest a change" / "Send a suggestion" feedback links (see "Submit an Issue" Footer Link below)
 
 ---
 
@@ -54,8 +54,9 @@
 - ✅ Mission statement
 - ✅ Short paragraph on CAOS origin
 - ✅ Board member bios with headings
-- 🔲 Board member photos and image descriptions (see "Leadership Bios & Photos" below)
-- 🔲 Advisory board description and member list
+- ✅ Board member photos and image descriptions (see "Leadership Bios & Photos" below). Elizabeth Ruhland's image description is still a placeholder ([caostest#25](https://github.com/center4aos/caostest/issues/25))
+- ✅ Advisory board description
+- 🔲 Advisory board member list
 
 ### Resources
 
@@ -83,7 +84,8 @@
 ### Support CAOS
 
 - ✅ Mission-framed donation intro
-- ✅ PayPal, Venmo, Zelle, Benevity, planned giving language, check instructions
+- ✅ PayPal, Venmo, Benevity, planned giving language, check instructions (Zelle was removed)
+- 🔲 Benevity organization ID, once CAOS is registered ([caostest#1](https://github.com/center4aos/caostest/issues/1))
 - ✅ giving@caos.org contact
 - ✅ Mailing address
 - ✅ EIN (39-2978169)
@@ -103,11 +105,10 @@
 - **Internal links:** Always use `{{ "/path/" | relative_url }}` — never hardcode `/caostest/` or bare root-relative paths, so links survive migration to domain root.
 - **Blog:** `_posts/YYYY-MM-DD-title.md` with `layout: post`
 - **Events:** `_events/YYYY-MM-DD-title.md` with `layout: event`; past events drop off calendar automatically on each build
-- **Forms:** backend not yet wired up
+- **Forms:** contact form posts to Formspree; newsletter signup posts to Buttondown, with custom confirmation pages (`subscribe-confirm.md`, `subscribe-thanks.md`)
 - **GitHub Pages:** Legacy build, `baseurl: /caostest`; migration to domain root requires changing `baseurl: ""` in `_config.yml`
 - **Repo identity:** Add `repo: center4aos/caostest` to `_config.yml` as the single source of truth for the main repo's GitHub path (used by the footer/registry lookup below). **Verified:** grepping `_includes`/`_layouts` today turns up zero hardcoded occurrences of `caostest`/`center4aos` — the only places that string appears are `_config.yml`'s `baseurl` (a separate setting, governing URL paths not repo identity) and `README.md` (excluded from the build, plain dev documentation). So as long as templates only ever read `site.repo` and never hardcode the literal name, one value is genuinely sufficient here — this isn't an uncertain platform behavior, just an implementation-discipline check.
 - **Migration checklist (one-time, do together):** when the repo is eventually renamed and the site moves to its permanent domain, update in the same pass: `baseurl` (above), `repo` (this line), `README.md`'s hardcoded live-site URL and org links, the `CNAME` file currently living in `center4aos.github.io` (needs to be added to the root of the renamed repo, formerly caostest, so the custom domain keeps resolving to it), and the `repository:` target hardcoded in `governance`'s `notify-site.yml` dispatch workflow (see "Automation design" under "Governance Repository Integration" below — the dispatch token itself survives the rename since GitHub tracks PAT permissions by repo ID, not name, but the hardcoded target name still needs updating). GitHub's own repo-rename redirects are a safety net if any of these lag briefly, but shouldn't be relied on long-term.
-- **Known small bug, unrelated to this work:** `_includes/footer.html` references `site.github_username`, which is never set in `_config.yml` — the "Connect → GitHub" footer link currently silently fails to render. Worth a one-line fix whenever footer.html is next touched.
 
 ---
 
@@ -133,7 +134,7 @@ governance:
       url: /governance/library/
 ```
 
-No `issue_template` field — see "Suggest a change" decisions below for why template filenames are deliberately *not* tracked in this registry.
+An optional `issue_template` field was added later (see "Issue templates are each repo's own concern" below). Governance deliberately leaves it unset, so GitHub's own template chooser applies.
 
 ### Setup steps
 
@@ -449,7 +450,7 @@ Per the Site Map and Governance page-structure updates above, these two pages ha
 
 ### Decisions
 
-- **Placement — amended:** Still lives in the existing utility footer column (with Accessibility Statement / Contact / Donate), but as its own visually distinct sub-group rather than folded into that list. The two-path Q&A structure below (decided this round) is more text than a single link, so it gets a small bold label — "**Suggest a Change**" — directly above its own short list, reusing the exact `<p><strong>...</strong></p>` pattern the footer already uses for the "Connect" label. This keeps the existing Accessibility/Contact/Donate list uncluttered while still avoiding a brand-new footer column.
+- **Placement — amended:** Still lives in the existing utility footer column (with Accessibility Statement / Contact / Donate), but as its own visually distinct sub-group rather than folded into that list. The two-path Q&A structure below (decided this round) is more text than a single link, so it gets a small bold label — now "**Do you have feedback?**" — directly above its own short list, reusing the exact `<p><strong>...</strong></p>` pattern the footer already uses for the "Connect" label. This keeps the existing Accessibility/Contact/Donate list uncluttered while still avoiding a brand-new footer column.
 - **Label:** Uniform **"Suggest a change"** site-wide (not varied per repo) for the GitHub-issue path, with an explicit `aria-label="Suggest a change (opens a GitHub issue in a new tab)"`. The site-wide external-link script in `_layouts/default.html:47-58` only sets a generic `(opens in new tab)` aria-label when one isn't already present, so this manual, more specific label is respected; `target="_blank"` / `rel="noopener noreferrer"` are still applied automatically since github.com is a different hostname.
 - **Repo source:** Driven by the `_data/external_repos.yml` registry above — `page.external_repo` is looked up, falling back to `site.repo` for ordinary site pages.
 - **Filename accuracy:** The referenced filename in the issue body has the registry's mount `path` prefix stripped before use, so it names a file that actually exists in the *target* repo rather than a caostest-only mount path (e.g. `conflict-of-interest-policy.md`, not `governance/library/conflict-of-interest-policy.md`). This also means the generated listing/index page itself (which never carries `external_repo` — see "External Repo Page Index & Titles") always reports its true caostest path and opens its issue against caostest, which is correct since that page is caostest's own code.
@@ -458,35 +459,17 @@ Per the Site Map and Governance page-structure updates above, these two pages ha
 
 ### Implementation
 
-```liquid
-{% assign ext = site.data.external_repos[page.external_repo] %}
-{% assign repo = ext.repo | default: site.repo %}
-{% assign mount_path = ext.path | default: "" %}
-{% assign relative_path = page.path | remove_first: mount_path | remove_first: "/" %}
-{% assign issue_title = "Issue: " | append: page.title | url_encode %}
-{% assign page_url = site.url | append: page.url %}
-{% assign issue_body = "**Page:** [" | append: page.title | append: "](" | append: page_url | append: ")\n**File:** `" | append: relative_path | append: "`\n\n[Describe your issue here]" | url_encode %}
-{% assign context_param = page.title | append: " -- " | append: page_url | url_encode %}
+The live code is in `_includes/footer.html`; it isn't duplicated here, so it can't drift out of date. In outline:
 
-<p class="footer-feedback-heading"><strong>Suggest a Change</strong></p>
-<ul class="footer-feedback-list">
-  <li>Got a GitHub account?
-    <a href="https://github.com/{{ repo }}/issues/new?title={{ issue_title }}&body={{ issue_body }}"
-       aria-label="Suggest a change (opens a GitHub issue in a new tab)">
-      Suggest a change
-    </a>
-  </li>
-  <li>No GitHub account?
-    <a href="{{ "/contact/" | relative_url }}?context={{ context_param }}">
-      Send a suggestion
-    </a>
-  </li>
-</ul>
-```
+- `repo` and an optional `issue_template` come from the `_data/external_repos.yml` entry for `page.external_repo`, falling back to `site.repo` and `site.issue_template` for ordinary site pages.
+- `relative_path` is `page.path` with the mount path stripped.
+- The page's full URL is `page.url | absolute_url`. This includes `baseurl`, so it's correct both at `/caostest/` and after migration. An earlier version used `site.url | append: page.url`, which dropped `/caostest` and produced 404 links in reported issues (fixed in caostest#26).
+- The issue body starts with "Please Describe your issue or suggestion below:", followed by a marked-off section with **Related page** (title and URL) and **File** (`relative_path`). This matches the caostest `page-issue.md` template.
+- The same title and URL, URL-encoded, become the `context` parameter on the "Send a suggestion" contact-page link.
 
 This block sits in the same footer column as the existing Accessibility Statement / Contact / Donate list, placed as its own labeled group rather than appended to that list — see "Placement — amended" above.
 
-**Known GitHub platform limitation:** `title=`/`body=` query params reliably pre-fill classic single-textarea Markdown issue templates. If a target repo uses the newer YAML-based issue *forms* (multiple structured fields), GitHub does not support pre-filling those fields via `title=`/`body=` — the visitor lands on the chooser/form with our context only in the (still pre-filled) title, not the body. This is a constraint of GitHub's own URL API, not something our Liquid can work around; worth checking which template style `center4aos/governance` actually uses once its templates exist.
+**Known GitHub platform limitation:** `title=`/`body=` query params reliably pre-fill classic single-textarea Markdown issue templates. If a target repo uses the newer YAML-based issue *forms* (multiple structured fields), GitHub does not support pre-filling those fields via `title=`/`body=` — the visitor lands on the chooser/form with our context only in the (still pre-filled) title, not the body. This is a constraint of GitHub's own URL API, not something our Liquid can work around. Checked: both caostest and governance use classic Markdown templates, so pre-filling works.
 
 On `contact.md`, a new hidden field:
 ```html
@@ -508,7 +491,7 @@ and a new topic option in `<select id="contact-topic">`:
 
 ### Issue templates are each repo's own concern
 
-Because the link no longer names a specific template file, no template filename needs to be created, registered, or kept in sync anywhere in this repo's config. Each target repo (`center4aos/caostest`, `center4aos/governance`, and any future one) is free to add, rename, or drop its own `.github/ISSUE_TEMPLATE/` files independently — the footer link keeps working either way. Neither repo has any issue templates yet today; adding some is optional polish for each repo's own maintainers, not a dependency of this feature.
+Because the link no longer names a specific template file, no template filename needs to be created, registered, or kept in sync anywhere in this repo's config. Each target repo (`center4aos/caostest`, `center4aos/governance`, and any future one) is free to add, rename, or drop its own `.github/ISSUE_TEMPLATE/` files independently — the footer link keeps working either way. Both repos now have templates: caostest has `page-issue.md`, and governance has `policy-issue.md` and `general.md`. **Amended:** an optional `template=` parameter was added after all. caostest sets `issue_template: page-issue.md` in `_config.yml`, so its "Suggest a change" links open that template directly. Any registry entry can set `issue_template` too, but governance leaves it unset, so GitHub shows its own chooser.
 
 **Verified:** `page.path` for `_posts`/`_events` collection items does resolve to a meaningful relative source path in Liquid — confirmed by loading this repo's actual site with `bundle exec ruby` (Jekyll 3.9.3, the version pinned via the `github-pages` gem) and inspecting what `to_liquid` exposes as `"path"`: `_posts/2026-06-25-new-caos-web-site.md` for the existing blog post, `_events/2026-07-15-board-meeting.md` for the existing board-meeting event. (Note: the raw Ruby `Document#path` accessor returns an *absolute* filesystem path — a red herring if you check it that way — but `{{ page.path }}` as seen by Liquid templates is always the relative path, matching what ordinary pages like `governance.md` already show.) No changes needed to reach this conclusion; the `remove_first: mount_path` stripping described above is a no-op for posts/events, which is correct since they have no `external_repo`/mount prefix to strip in the first place.
 
