@@ -36,9 +36,7 @@ title:'PayPal - The safer, easier way to pay online!',
 [@CAOS-org](https://www.venmo.com/u/CAOS-org)
 
 #### Benevity
-If your employer matches donations through Benevity, you can direct your gift to CAOS.
-<!-- TODO: Add Benevity organization ID -->
-*Organization ID coming soon.*
+If your employer matches donations through Benevity, you can direct your gift to CAOS. In your company's giving portal, search for **Center for Accessibility and Open Source** or our EIN, **39-2978169**. You can also view [our Benevity cause profile](https://causes.benevity.org/causes/840-392978169).
 
 #### Planned Giving
 If you would like to include CAOS in your estate plans, you may use the following sample language:
