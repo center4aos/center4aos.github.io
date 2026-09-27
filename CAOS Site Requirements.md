@@ -85,7 +85,7 @@
 
 - ✅ Mission-framed donation intro
 - ✅ PayPal, Venmo, Benevity, planned giving language, check instructions (Zelle was removed)
-- 🔲 Benevity organization ID, once CAOS is registered ([caostest#1](https://github.com/center4aos/caostest/issues/1))
+- ✅ Benevity search instructions (legal name and EIN) and link to the cause profile ([caostest#1](https://github.com/center4aos/caostest/issues/1)). Benevity lists CAOS under its legal name, not "CAOS"
 - ✅ giving@caos.org contact
 - ✅ Mailing address
 - ✅ EIN (39-2978169)
