@@ -24,7 +24,7 @@
           {% assign relative_path = relative_path | remove_first: "/" %}
         {% endif %}
         {% assign issue_title = "Issue: " | append: page.title | url_encode %}
-        {% assign page_url = site.url | append: page.url %}
+        {% assign page_url = page.url | absolute_url %}
         {% capture issue_body_raw %}Please Describe your issue or suggestion below:
 
 
