@@ -54,14 +54,14 @@
 - ✅ Mission statement
 - ✅ Short paragraph on CAOS origin
 - ✅ Board member bios with headings
-- ✅ Board member photos and image descriptions (see "Leadership Bios & Photos" below). Elizabeth Ruhland's image description is still a placeholder ([caostest#25](https://github.com/center4aos/caostest/issues/25))
+- ✅ Board member photos and image descriptions (see "Leadership Bios & Photos" below).
 - ✅ Advisory board description
 - 🔲 Advisory board member list
 
 ### Resources
 
 - ✅ Page structure, headings, and framing text in place
-- 🔲 Actual resource listings with one-sentence descriptions (accessibility standards, open-source tools, disability/tech communities, learning/training)
+- ✅ Resource listings with one-sentence descriptions: standards and guidelines, open-source assistive technologies, disability and technology communities, learning and training
 
 ### Governance
 
