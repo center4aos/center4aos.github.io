@@ -28,6 +28,7 @@ CAOS is a California 501(c)(3) nonprofit — the first organization to make the 
 | `_includes/breadcrumbs.html` | Breadcrumbs built from the `ancestors` list (set per page, or by `_config.yml` defaults) |
 | `_includes/leadership-card.html` | One leadership bio card on the About page |
 | `_includes/external-repo-listing.html` | Recursive listing used by the Policy Library page |
+| `governance/filings/` | Financial filings such as the Form 990-N, each as an accessible Markdown page plus the original PDF |
 | `governance/library/` | Git submodule of [center4aos/governance](https://github.com/center4aos/governance), served as the Policy Library |
 | `_data/external_repos.yml` | Registry of mounted repos (currently just governance) |
 | `_data/external_repo_pages/` | Generated page titles and tree for each mounted repo, written by `script/sync-external-repo-pages.rb` |
@@ -132,7 +133,6 @@ Never hardcode `/caostest/...` paths or bare root-relative `/path/` links — bo
 Open work is tracked in [issues](https://github.com/center4aos/caostest/issues). Site content still to be written:
 
 - About page: advisory board member list
-- Governance page: Form 990 link
 - Governance page: board meeting schedule
 - Move the site from `/caostest/` to the domain root (see the migration checklist in `CAOS Site Requirements.md`)
 
