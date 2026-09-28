@@ -33,8 +33,7 @@ We believe accountability to our community requires openness. Our governing docu
 
 CAOS board meetings are held on a regular schedule and are open to the public except where the board votes to make a specific portion confidential. All board minutes are made available to the public once accepted by the board.
 
-<!-- TODO: Add meeting schedule -->
-*Meeting schedule coming soon.*
+Please check out the [Calendar of Events]({{ "/calendar/" | relative_url }}) for upcoming board meetings.
 
 ---
 
