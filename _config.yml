@@ -4,9 +4,9 @@ email: info@caos.org
 description: >-
   CAOS is a disability-led nonprofit promoting accessible
   open-source products and communities globally.
-baseurl: "/caostest"
+baseurl: ""
 url: "https://caos.org"
-repo: center4aos/caostest
+repo: center4aos/center4aos.github.io
 github_username: center4aos
 issue_template: page-issue.md
 
