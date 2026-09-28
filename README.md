@@ -131,11 +131,9 @@ Never hardcode `/caostest/...` paths or bare root-relative `/path/` links — bo
 
 Open work is tracked in [issues](https://github.com/center4aos/caostest/issues). Site content still to be written:
 
-- Resources page: actual resource listings
 - About page: advisory board member list
 - Governance page: Form 990 link
 - Governance page: board meeting schedule
-- About page: image description for Elizabeth Ruhland's photo (see issue #25)
 - Calendar: no upcoming events (the only event, the July 15 board meeting, has passed)
 - Move the site from `/caostest/` to the domain root (see the migration checklist in `CAOS Site Requirements.md`)
 
