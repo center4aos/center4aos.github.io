@@ -68,7 +68,7 @@
 - ✅ 501(c)(3) statement
 - ✅ Transparency statement
 - ✅ Single link to the Policy Library, replacing the old standalone Bylaws and Conflict of Interest Policy links, pointing into the governance repository submodule (see Governance Repository Integration). The standalone `bylaws.md` and `conflict-of-interest.md` pages have been removed.
-- 🔲 Form 990 link
+- ✅ Form 990 link: accessible Markdown version plus original PDF, in `governance/filings/` (e.g. `990-n-2024.md` and `990-n-2024.pdf`)
 - 🔲 Board meeting schedule
 
 ### Contact
