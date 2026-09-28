@@ -2,7 +2,7 @@
 layout: default
 title: Calendar
 permalink: /calendar/
-description: Upcoming CAOS events, board meetings, and community gatherings.
+description: Upcoming CAOS events.
 ---
 
 ## Calendar

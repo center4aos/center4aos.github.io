@@ -2,7 +2,7 @@
 layout: default
 title: Blog
 permalink: /blog/
-description: News, updates, and perspectives from the Center for Accessibility and Open Source.
+description: CAOS news, updates, and perspectives.
 ---
 
 ## CAOS Blog

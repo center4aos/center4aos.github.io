@@ -2,7 +2,7 @@
 layout: default
 title: Support CAOS
 permalink: /support/
-description: Help us make the world more accessible through open source. Every contribution matters.
+description: Become a CAOS contributor.
 ---
 
 ## Support CAOS
@@ -46,9 +46,8 @@ If you would like to include CAOS in your estate plans, you may use the followin
 #### Check
 Make checks payable to **Center for Accessibility and Open Source** and mail to:
 
-*Center for Accessibility and Open Source
-2703 7th St Ste 128
-Mailbox 313
+*Center for Accessibility and Open Source  
+2703 7th St Ste 128, Mailbox 313  
 Berkeley, CA 94710*
 
 ---

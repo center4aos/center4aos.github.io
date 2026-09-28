@@ -2,7 +2,7 @@
 layout: default
 title: About
 permalink: /about/
-description: Who we are, our mission, and the people behind CAOS.
+description: The CAOS mission and team.
 ---
 
 ## About CAOS

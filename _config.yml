@@ -1,9 +1,9 @@
 title: Center for Accessibility and Open Source
-tagline: Open source. Accessible to all.
+tagline: "From CAOS, access."
 email: info@caos.org
 description: >-
-  CAOS is a nonprofit organization led by people with disabilities
-  to promote open-source accessibility worldwide.
+  CAOS is a disability-led nonprofit promoting accessible
+  open-source products and communities globally.
 baseurl: "/caostest"
 url: "https://caos.org"
 repo: center4aos/caostest

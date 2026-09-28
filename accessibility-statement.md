@@ -2,7 +2,7 @@
 layout: default
 title: Accessibility Statement
 permalink: /accessibility-statement/
-description: Our commitment to making this site usable by everyone.
+description: CAOS is committed to accessibility.
 ---
 
 ## Accessibility Statement
