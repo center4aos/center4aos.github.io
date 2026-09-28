@@ -2,7 +2,7 @@
 
 Jekyll site for the **Center for Accessibility and Open Source** (CAOS).
 
-**Live site:** https://caos.org/caostest/  
+**Live site:** https://caos.org/  
 **Organization:** https://github.com/center4aos
 
 ---
@@ -37,6 +37,8 @@ CAOS is a California 501(c)(3) nonprofit — the first organization to make the 
 | `.github/workflows/update-submodule.yml` | Updates the governance submodule automatically when the governance repo changes |
 | `.github/ISSUE_TEMPLATE/page-issue.md` | Template for "Suggest a change" issues filed against this repo |
 | `assets/css/accessibility.scss` | Accessibility-focused style overrides |
+| `CNAME` | Custom domain (`caos.org`) for GitHub Pages; do not remove |
+| `404.html` | "Page Not Found" page for the whole caos.org domain |
 | `index.md` | Home page: mission, blog preview, upcoming events, newsletter signup |
 | `about.md` | About CAOS, mission, leadership bios, advisory board |
 | `projects.md` | Active partnerships (CREATE, Teach Access, NV Access) |
@@ -106,13 +108,13 @@ desc: Image description (alt text) for the headshot.
 
 ## Internal Links
 
-All internal links must use Jekyll's `relative_url` filter so they remain correct when the site moves from `/caostest/` to the domain root:
+All internal links must use Jekyll's `relative_url` filter so they stay correct if `baseurl` ever changes (the site lived at `/caostest/` until September 2026):
 
 ```liquid
 [Link text]({{ "/path/to/page/" | relative_url }})
 ```
 
-Never hardcode `/caostest/...` paths or bare root-relative `/path/` links — both break on migration.
+Never hardcode paths that include a `baseurl`, or bare root-relative `/path/` links.
 
 ---
 
@@ -124,16 +126,15 @@ Never hardcode `/caostest/...` paths or bare root-relative `/path/` links — bo
 - **External links:** Automatically open in a new tab with a screen-reader-friendly `aria-label`
 - **Forms:** Contact form posts to Formspree; newsletter signup (home and contact pages) posts to Buttondown
 - **Policy Library:** When the governance repo's `main` branch changes, its `notify-site.yml` workflow triggers this repo's `update-submodule.yml`, which updates the submodule, regenerates `_data/external_repo_pages/governance.yml`, and pushes. No manual step needed. Governance documents need an empty front matter block (`---` / `---`) at the top to render as pages
-- **GitHub Pages:** Legacy build from root of `main` branch; `baseurl: /caostest`. Moving to the domain root is a one-time checklist in `CAOS Site Requirements.md`
+- **GitHub Pages:** This repo is the CAOS organization site (`center4aos.github.io`), served at https://caos.org/ via the `CNAME` file. Legacy build from root of `main` branch; `baseurl: ""`. It was `caostest` at `/caostest/` until September 2026; see "Promotion to caos.org" in `CAOS Site Requirements.md`
 
 ---
 
 ## Outstanding TODOs
 
-Open work is tracked in [issues](https://github.com/center4aos/caostest/issues). Site content still to be written:
+Open work is tracked in [issues](https://github.com/center4aos/center4aos.github.io/issues). Site content still to be written:
 
 - About page: advisory board member list
-- Move the site from `/caostest/` to the domain root (see the migration checklist in `CAOS Site Requirements.md`)
 
 ---
 
