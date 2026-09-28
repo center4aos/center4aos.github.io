@@ -2,7 +2,7 @@
 layout: default
 title: Resources
 permalink: /resources/
-description: A curated collection of open-source accessibility and disability technology resources.
+description: A curated collection of open-source accessibility resources.
 ---
 
 ## Resources

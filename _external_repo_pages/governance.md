@@ -2,7 +2,7 @@
 layout: default
 title: Policy Library
 permalink: "/governance/library/"
-description: Bylaws, policies, and other governing documents for CAOS.
+description: CAOS bylaws, policies, and other governance documents.
 ancestors:
 - title: Governance
   url: "/governance/"

@@ -2,7 +2,7 @@
 layout: default
 title: CAOS Home
 permalink: /
-description: The Center for Accessibility and Open Source — where disability, accessibility, and open source meet.
+description: The intersection of disability, accessibility, and open source.
 ---
 
 ## Welcome to the Center for Accessibility and Open Source

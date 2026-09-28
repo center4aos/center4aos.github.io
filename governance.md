@@ -2,7 +2,7 @@
 layout: default
 title: Governance
 permalink: /governance/
-description: CAOS organizational structure, policies, and public documents.
+description: CAOS structure, policies, and public documents.
 ---
 
 ## Governance

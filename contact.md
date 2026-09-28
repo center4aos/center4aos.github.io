@@ -2,7 +2,7 @@
 layout: default
 title: Contact CAOS
 permalink: /contact/
-description: Reach out, get in touch, and get involved with CAOS.
+description: Get in touch and get involved with CAOS.
 ---
 
 ## Contact Us
@@ -110,7 +110,7 @@ Stay up to date with CAOS news, events, and opportunities by subscribing to CAOS
 ### Our SnailMail Address
 
 It might take a while to get to us, but you can send stuff to:
-*The Center for Accessibility and Open Source   
-2703 7TH ST STE 128 
-MAILBOX 313    
+
+*The Center for Accessibility and Open Source  
+2703 7TH ST STE 128, MAILBOX 313  
 BERKELEY, CA 94710*
