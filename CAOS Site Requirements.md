@@ -69,7 +69,7 @@
 - ✅ Transparency statement
 - ✅ Single link to the Policy Library, replacing the old standalone Bylaws and Conflict of Interest Policy links, pointing into the governance repository submodule (see Governance Repository Integration). The standalone `bylaws.md` and `conflict-of-interest.md` pages have been removed.
 - ✅ Form 990 link: accessible Markdown version plus original PDF, in `governance/filings/` (e.g. `990-n-2024.md` and `990-n-2024.pdf`)
-- 🔲 Board meeting schedule
+- ✅ Board meetings: points to the Calendar of Events for upcoming meetings
 
 ### Contact
 
@@ -78,7 +78,7 @@
   - Topics: Seeking advice, Partnership proposal, Seeking support, Media inquiry, Advisory Board, Donation
 - ✅ Contact form backend configured
 - ✅ Newsletter signup embed on contact page
-- 🔲 Newsletter signup backend (Buttondown)
+- ✅ Newsletter signup backend (Buttondown), confirmed working end to end
 - ✅ Snail mail address
 
 ### Support CAOS
@@ -108,7 +108,53 @@
 - **Forms:** contact form posts to Formspree; newsletter signup posts to Buttondown, with custom confirmation pages (`subscribe-confirm.md`, `subscribe-thanks.md`)
 - **GitHub Pages:** Legacy build, `baseurl: /caostest`; migration to domain root requires changing `baseurl: ""` in `_config.yml`
 - **Repo identity:** Add `repo: center4aos/caostest` to `_config.yml` as the single source of truth for the main repo's GitHub path (used by the footer/registry lookup below). **Verified:** grepping `_includes`/`_layouts` today turns up zero hardcoded occurrences of `caostest`/`center4aos` — the only places that string appears are `_config.yml`'s `baseurl` (a separate setting, governing URL paths not repo identity) and `README.md` (excluded from the build, plain dev documentation). So as long as templates only ever read `site.repo` and never hardcode the literal name, one value is genuinely sufficient here — this isn't an uncertain platform behavior, just an implementation-discipline check.
-- **Migration checklist (one-time, do together):** when the repo is eventually renamed and the site moves to its permanent domain, update in the same pass: `baseurl` (above), `repo` (this line), `README.md`'s hardcoded live-site URL and org links, the `CNAME` file currently living in `center4aos.github.io` (needs to be added to the root of the renamed repo, formerly caostest, so the custom domain keeps resolving to it), and the `repository:` target hardcoded in `governance`'s `notify-site.yml` dispatch workflow (see "Automation design" under "Governance Repository Integration" below — the dispatch token itself survives the rename since GitHub tracks PAT permissions by repo ID, not name, but the hardcoded target name still needs updating). GitHub's own repo-rename redirects are a safety net if any of these lag briefly, but shouldn't be relied on long-term.
+- **Migration checklist:** see "Promotion to caos.org" below.
+
+---
+
+## Promotion to caos.org
+
+Decided September 2026 (Option A): the site becomes the organization site. The `caostest` repo is renamed `center4aos.github.io`, and the existing `center4aos.github.io` repo (a single "under construction" page served from `/docs`) is renamed `caos-landing-2023` and archived. Any other CAOS repo that later enables GitHub Pages will then appear at `caos.org/<repo>/`. A repo must never enable Pages under a name that matches a site path (for example `governance`), or it would shadow that part of the site.
+
+### Pre-flight review (September 2026)
+
+- The site's own pages and templates are migration-safe: no hard-coded `/caostest/` paths or unfiltered root-relative links. A test build with `baseurl: ""` found 585 internal links, all valid except one in the governance repo (below). Every absolute `caos.org` URL, redirect page, feed, sitemap, and footer link is generated from `url` + `baseurl`; every `github.com/center4aos/caostest` link comes from `repo:`.
+- DNS needs no change: `caos.org` points at GitHub Pages, and `www.caos.org` is an alias of it.
+- Old `caos.org/caostest/...` URLs will stop working. Don't create a placeholder `caostest` repo to redirect them: that would break GitHub's automatic redirects from the renamed repo (old issue and pull request links).
+
+### Checklist
+
+**Phase 1: prepare (nothing goes live)**
+
+1. Promotion pull request in this repo, opened but **not merged until step 7**:
+   - `_config.yml`: `baseurl: ""` and `repo: center4aos/center4aos.github.io`
+   - `CNAME` file at the repo root containing `caos.org`
+   - `404.html` page (the site becomes responsible for 404s on the whole domain)
+   - README and this document updated for the new URL and repo name
+2. Governance repo pull request, opened but **not merged until step 11**:
+   - `.github/workflows/notify-site.yml`: `repository: center4aos/center4aos.github.io`
+   - `CONTRIBUTING.md`: Contact page placeholders → `https://caos.org/contact/`; newsletter placeholder → `https://caos.org/contact/#newsletter`
+   - `policies/accessibility-policy.md`: Website Accessibility Statement placeholder → `https://caos.org/accessibility-statement/`
+   - `policies/accessibility-statement.md`: fix the broken `/accessibility-policy/` link to point to `accessibility-policy.md`
+3. Outside GitHub, check before switching:
+   - Buttondown: note the current confirmation and thank-you redirect URLs, and have the new ones ready (`https://caos.org/contact/subscribe-confirm/` and `https://caos.org/contact/subscribe-thanks/`)
+   - Formspree: check whether a redirect to `/caostest/contact/thanks/` is configured
+   - `SITE_DISPATCH_TOKEN` (governance repo secret): check the token's expiry date
+
+**Phase 2: switch over (caos.org briefly unavailable; HTTPS certificate can take up to an hour)**
+
+4. Old `center4aos.github.io` repo: Settings → Pages → remove the custom domain `caos.org`.
+5. Rename the old repo to `caos-landing-2023`.
+6. Rename `caostest` to `center4aos.github.io`.
+7. Merge the promotion pull request (step 1).
+8. New `center4aos.github.io` repo: Settings → Pages → confirm source is `main` / root, custom domain is `caos.org`, and the DNS check passes. Once the certificate is issued, turn on **Enforce HTTPS**.
+9. Buttondown: update the confirmation and thank-you redirect URLs (and Formspree if step 3 found one).
+
+**Phase 3: verify, then finish**
+
+10. Re-run the link check against the live site. Spot-check the home page, Contact (including a test newsletter signup), Policy Library, the Form 990-N page and its PDF, a "Suggest a change" link, and `http://`, `www.`, and a missing page (404).
+11. Merge the governance pull request (step 2). Its push to `main` must trigger `update-submodule.yml` in the renamed repo; confirm the workflow runs and the site rebuilds.
+12. Archive `caos-landing-2023`. Update local clones (`git remote set-url origin https://github.com/center4aos/center4aos.github.io.git`) and any notes that mention `caostest`.
 
 ---
 

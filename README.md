@@ -133,7 +133,6 @@ Never hardcode `/caostest/...` paths or bare root-relative `/path/` links — bo
 Open work is tracked in [issues](https://github.com/center4aos/caostest/issues). Site content still to be written:
 
 - About page: advisory board member list
-- Governance page: board meeting schedule
 - Move the site from `/caostest/` to the domain root (see the migration checklist in `CAOS Site Requirements.md`)
 
 ---
