@@ -7,19 +7,19 @@ description: The CAOS mission and team.
 
 ## About CAOS
 
-The Center for Accessibility and Open Source (CAOS) is a disability-led open-source organization. We are the first organization to make the accessibility of open-source resources our primary mission — a place where the values of the open-source and disability rights movements come together.
+The Center for Accessibility and Open Source is a disability-led open-source organization, with the accessibility of open source being its single mission.
 
 ---
 
 ### Vision
 
-CAOS aims to be the global community's hub for resources and information at the intersection of accessibility, disability equity, and open source.
+A world where open source drives disability equity.
 
 ---
 
 ### Mission Statement
 
-With the goal of expanding opportunities and inclusion for people with disabilities globally, the Center for Accessibility and Open Source supports the creation of accessible open-source products through explicit disability inclusion in mainstream open-source communities. We are equally committed to supporting the visibility and sustainability of communities developing open-source assistive technologies.
+With the goal of expanding opportunities and inclusion for people with disabilities globally, the Center for Accessibility and Open Source supports the creation of accessible open-source projects through explicit disability inclusion in mainstream open-source communities. We are equally committed to supporting the visibility and sustainability of communities developing open-source assistive technologies.
 
 ---
 
