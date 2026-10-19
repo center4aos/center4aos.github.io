@@ -15,6 +15,7 @@ Below is a curated, growing list of resources to support that work.
 
 ### Accessibility Standards and Guidelines
 
+- [The Open Source Accessibility Framework](https://github.com/open-source-accessibility/Open-Source-Accessibility-Framework) — Turns open-source accessibility goals into public, trackable progress, providing phased actions for improving documentation, workflows, testing, and community practices without requiring projects to solve everything at once.
 - [Accessibility Best Practices for Your Project](https://opensource.guide/accessibility-best-practices-for-your-project/) — A guide for open-source maintainers from GitHub's Open Source Guides, covering accessibility statements, accessible documentation, and building accessibility into issue templates, pull request checklists, and testing.
 - [W3C Accessibility Standards Overview](https://www.w3.org/WAI/standards-guidelines/) — The World Wide Web Consortium's starting point for the international accessibility standards, including WCAG, ATAG, and WAI-ARIA.
 - [WCAG2ICT: Applying WCAG to Non-Web Software and Documents](https://www.w3.org/WAI/standards-guidelines/wcag/non-web-ict/) — W3C guidance on applying WCAG to desktop apps, command-line tools, documents, and other non-web software, highly relevant to most open-source projects.
