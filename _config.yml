@@ -77,3 +77,4 @@ exclude:
   - LICENSE-CONTENT
   - node_modules
   - vendor
+  - script
